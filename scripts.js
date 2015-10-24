@@ -39,6 +39,7 @@ function updateTable()
             alert("Sorry could you repeat that?");
         else
             repeat = false;
+
     }
     repeat = true;
     while(repeat)
@@ -51,14 +52,37 @@ function updateTable()
             repeat = false;
     }
 
+    var x = new Date(Date.parse(purchaseDate));
+    purchaseDate = x.toDateString();
+    var y = new Date(Date.parse(expirationDate));
+    expirationDate = y.toDateString();
+
     name.innerHTML = tracker +". " + foodName;
     description.innerHTML = foodDescription;
     date.innerHTML = purchaseDate;
     expiration.innerHTML = expirationDate;
 
+    var background = expirationColor(expirationDate);
+
+    if(background)
+        row.style.backgroundColor = "red";
+
     tracker++;
 }
 
+function expirationColor(expire)
+{
+    expire = new Date(Date.parse(expire));
+
+    var someDate = new Date();
+    var numberOfDaysToAdd = 3;
+    someDate.setDate(someDate.getDate() + numberOfDaysToAdd);
+
+    if(someDate >= expire)
+        return true;
+    else
+        return false;
+}
 function deleteRow()
 {
     if(tracker > 1)
