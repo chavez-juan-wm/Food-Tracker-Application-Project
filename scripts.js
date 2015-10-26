@@ -29,8 +29,11 @@ function deleteRow()
 {
     if(tracker > 1)
     {
-        tracker--;
-        $("#" + whichRow + "row").remove();
+        if($("#" + whichRow + "row").length)
+        {
+            tracker--;
+            $("#" + whichRow + "row").remove();
+        }
     }
 }
 
