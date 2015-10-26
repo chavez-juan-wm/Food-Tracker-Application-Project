@@ -7,7 +7,7 @@
     <script src="jquery-2.1.4.min.js"></script>
     <script src="scripts.js"></script>
 </head>
-<body>
+<body onload="createTable()">
 
     <table id="myTable" align="center">
         <tr>
@@ -16,15 +16,9 @@
             <th>Date of Purchase (mm-dd-yyyy)</th>
             <th>Expiration Date (mm-dd-yyyy)</th>
         </tr>
-        <tr>
-            <td><input type="text"></td>
-            <td><input type="text"></td>
-            <td><input type="text" id = "purchaseDate1"></td>
-            <td><input type="text" id = "expirationDate1"></td>
-        </tr>
     </table>
 
-    <button onclick="createTable()">Add a Row</button> <button onclick="deleteRow()">Delete Row</button>
+    <button onclick="createTable()">Add a Row</button> <button onclick="deleteRow()">Delete Selected Row</button>
 
 </body>
 </html>

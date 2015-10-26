@@ -1,15 +1,20 @@
-var tracker = 2;
+var tracker = 1;
+var idNames = 1;
+var whichRow;
 
 function createTable()
 {
     var table = document.getElementById("myTable");
     var row = table.insertRow(tracker);
+    row.id = idNames + "row";
     var name = row.insertCell(0);
     var description = row.insertCell(1);
     var date = row.insertCell(2);
+    date.id = idNames + "purchase";
     var expiration = row.insertCell(3);
-    var purchaseId = "purchaseDate" + tracker;
-    var expireId = "expirationDate" + tracker;
+    expiration.id = idNames + "expiration";
+    var purchaseId = "purchaseDate" + idNames;
+    var expireId = "expirationDate" + idNames;
 
     name.innerHTML = "<input type='text'>";
     description.innerHTML = "<input type='text'>";
@@ -17,14 +22,15 @@ function createTable()
     expiration.innerHTML = "<input type='text' id = '" + expireId + "'>";
 
     tracker++;
+    idNames++;
 }
 
 function deleteRow()
 {
-    if(tracker > 2)
+    if(tracker > 1)
     {
         tracker--;
-        document.getElementById("myTable").deleteRow(tracker);
+        $("#" + whichRow + "row").remove();
     }
 }
 
@@ -35,7 +41,12 @@ $(document).ready(function()
         var originalContent = $(this).text();
 
         if(isDate(originalContent) || originalContent == "Invalid Date")
-            $(this).html("<input type='text' value='" + originalContent + "' id = 'expiration'/>");
+        {
+            if(this.id.indexOf("expiration") >= 0)
+                $(this).html("<input type='text' value='" + originalContent + "' id = 'expiration'/>");
+            else if(this.id.indexOf("purchase") >= 0)
+                $(this).html("<input type='text' value='" + originalContent + "' id = 'purchase'/>");
+        }
         else
             $(this).html("<input type='text' value='" + originalContent + "'/>");
     });
@@ -46,18 +57,13 @@ $(document).ready(function()
 
         if(this.id.indexOf('purchase') >= 0)
         {
-            alert("It's in the purchase if");
             var x = new Date(Date.parse(newContent));
             newContent = x.toDateString();
-            newContent.id = "purchase";
         }
         else if(this.id.indexOf('expiration') >= 0)
         {
-            alert("It's in the expiration if");
             var y = new Date(Date.parse(newContent));
             newContent = y.toDateString();
-            newContent.id = "expiration";
-
             expirationColor(newContent)
         }
 
@@ -73,9 +79,9 @@ $(document).ready(function()
         someDate.setDate(someDate.getDate() + numberOfDaysToAdd);
 
         if (someDate >= expire)
-            $("td").css( "background-color", "red" );
+            $("#" + whichRow + "row").css('background-color','red');
         else
-            $("td").css( "background-color", "transparent");
+            $("#" + whichRow + "row").css('background-color','transparent');
     }
 
     function isDate(val)
@@ -84,4 +90,11 @@ $(document).ready(function()
         return !isNaN(d.valueOf());
     }
 
+    $(document).on('click', "#myTable tr", function()
+    {
+        $("td").css('border-color', 'black');
+
+        whichRow = parseInt(this.id);
+        $("#" + whichRow + "row td").css('border-color','blue');
+    });
 });
