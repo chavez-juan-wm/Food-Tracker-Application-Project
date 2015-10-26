@@ -1,7 +1,6 @@
-/*Created by session2 on 10/22/15.*/
-var tracker = 1;
+var tracker = 2;
 
-function updateTable()
+function createTable()
 {
     var table = document.getElementById("myTable");
     var row = table.insertRow(tracker);
@@ -9,85 +8,80 @@ function updateTable()
     var description = row.insertCell(1);
     var date = row.insertCell(2);
     var expiration = row.insertCell(3);
-    var repeat = true;
+    var purchaseId = "purchaseDate" + tracker;
+    var expireId = "expirationDate" + tracker;
 
-    while(repeat)
-    {
-        var foodName = prompt("Enter the food's name: ");
-
-        if(foodName == "")
-            alert("Sorry could you repeat that?");
-        else
-            repeat = false;
-    }
-    repeat = true;
-    while(repeat)
-    {
-        var foodDescription = prompt("Enter a description for the food: ");
-
-        if(foodDescription == "")
-            alert("Sorry could you repeat that?");
-        else
-            repeat = false;
-    }
-    repeat = true;
-    while(repeat)
-    {
-        var purchaseDate = prompt("Date of purchase: ");
-
-        if(purchaseDate == "")
-            alert("Sorry could you repeat that?");
-        else
-            repeat = false;
-
-    }
-    repeat = true;
-    while(repeat)
-    {
-        var expirationDate = prompt("Expiration date for the food: ");
-
-        if(expirationDate == "")
-            alert("Sorry could you repeat that?");
-        else
-            repeat = false;
-    }
-
-    var x = new Date(Date.parse(purchaseDate));
-    purchaseDate = x.toDateString();
-    var y = new Date(Date.parse(expirationDate));
-    expirationDate = y.toDateString();
-
-    name.innerHTML = tracker +". " + foodName;
-    description.innerHTML = foodDescription;
-    date.innerHTML = purchaseDate;
-    expiration.innerHTML = expirationDate;
-
-    var background = expirationColor(expirationDate);
-
-    if(background)
-        row.style.backgroundColor = "red";
+    name.innerHTML = "<input type='text'>";
+    description.innerHTML = "<input type='text'>";
+    date.innerHTML = "<input type='text' id = '" + purchaseId + "'>";
+    expiration.innerHTML = "<input type='text' id = '" + expireId + "'>";
 
     tracker++;
 }
 
-function expirationColor(expire)
-{
-    expire = new Date(Date.parse(expire));
-
-    var someDate = new Date();
-    var numberOfDaysToAdd = 3;
-    someDate.setDate(someDate.getDate() + numberOfDaysToAdd);
-
-    if(someDate >= expire)
-        return true;
-    else
-        return false;
-}
 function deleteRow()
 {
-    if(tracker > 1)
+    if(tracker > 2)
     {
         tracker--;
         document.getElementById("myTable").deleteRow(tracker);
     }
 }
+
+$(document).ready(function()
+{
+    $(document).on("dblclick", "#myTable td", function()
+    {
+        var originalContent = $(this).text();
+
+        if(isDate(originalContent) || originalContent == "Invalid Date")
+            $(this).html("<input type='text' value='" + originalContent + "' id = 'expiration'/>");
+        else
+            $(this).html("<input type='text' value='" + originalContent + "'/>");
+    });
+
+    $(document).on("change", "input", function()
+    {
+        var newContent = $(this).val();
+
+        if(this.id.indexOf('purchase') >= 0)
+        {
+            alert("It's in the purchase if");
+            var x = new Date(Date.parse(newContent));
+            newContent = x.toDateString();
+            newContent.id = "purchase";
+        }
+        else if(this.id.indexOf('expiration') >= 0)
+        {
+            alert("It's in the expiration if");
+            var y = new Date(Date.parse(newContent));
+            newContent = y.toDateString();
+            newContent.id = "expiration";
+
+            expirationColor(newContent)
+        }
+
+        $(this).parent().text(newContent);
+    });
+
+    function expirationColor(expire)
+    {
+        expire = new Date(Date.parse(expire));
+
+        var someDate = new Date();
+        var numberOfDaysToAdd = 3;
+        someDate.setDate(someDate.getDate() + numberOfDaysToAdd);
+
+        if (someDate >= expire)
+            $("td").css( "background-color", "red" );
+        else
+            $("td").css( "background-color", "transparent");
+    }
+
+    function isDate(val)
+    {
+        var d = new Date(val);
+        return !isNaN(d.valueOf());
+    }
+
+});

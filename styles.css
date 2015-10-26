@@ -4,3 +4,7 @@ table, th, td
     border-collapse: collapse;
     padding: 10px;
 }
+tr:hover
+{
+    background-color: #ffff99;
+}
