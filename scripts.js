@@ -27,7 +27,7 @@ function createTable()
 
 function deleteRow()
 {
-    if(tracker > 1)
+    if(tracker > 2)
     {
         if($("#" + whichRow + "row").length)
         {
