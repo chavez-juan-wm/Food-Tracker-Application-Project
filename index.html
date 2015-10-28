@@ -8,10 +8,13 @@
     <script src="scripts.js"></script>
 </head>
 <body onload="createTable()">
-    <div>
-        <p style="text-align: center">*Double Click on a cell to edit it again*</p>
-    </div>
+    <div class="advice">
+        <p>Double click on a cell to edit it again.</p>
+        <p>The selected row is outlined in blue.</p>
+        <p>Food that is expiring in the next three days or is expired is highlighted in red. </p>
+        <button onclick="createTable()">Add a Row</button> <button onclick="deleteRow()">Delete Selected Row</button>
 
+    </div>
 
     <table id="myTable" align="center">
         <tr>
@@ -22,9 +25,7 @@
         </tr>
     </table>
 
-<div style="text-align: center">
-    <button onclick="createTable()">Add a Row</button> <button onclick="deleteRow()">Delete Selected Row</button>
-</div>
+
 
 
 </body>

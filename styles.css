@@ -8,3 +8,16 @@ tr:hover
 {
     background-color: #ffff99!important;
 }
+table
+{
+    margin: auto;
+}
+.advice
+{
+    float: left;
+    width: 300px;
+}
+#myTable
+{
+    float: left;
+}
