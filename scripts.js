@@ -37,6 +37,15 @@ function deleteRow()
     }
 }
 
+function deleteLastRow()
+{
+    if(tracker > 2)
+    {
+        document.getElementById("myTable").deleteRow((tracker-1));
+        tracker--;
+    }
+}
+
 $(document).ready(function()
 {
     $(document).on("dblclick", "#myTable td", function()
