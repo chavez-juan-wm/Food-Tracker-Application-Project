@@ -93,7 +93,7 @@ $(document).ready(function()
         if (someDate >= expire)
             $("#" + whichRow + "row").css('background-color','red');
         else
-            $("#" + whichRow + "row").css('background-color','transparent');
+            $("#" + whichRow + "row").css('background-color','white');
     }
 
     function isDate(val)

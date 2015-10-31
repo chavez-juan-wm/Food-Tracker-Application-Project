@@ -12,6 +12,10 @@ tr:hover
 {
     float: left;
     width: 310px;
+    background-color: white;
+    border: 2px solid;
+    text-align: center;
+    height: 250px;
 }
 #myTable
 {
@@ -19,6 +23,18 @@ tr:hover
 }
 p
 {
-    padding-right: 20px;
-    margin-top: 1px;
+    padding-right: 10px;
+    padding-left: 10px;
+}
+body
+{
+    background-image: url("http://www.pymnts.com/wp-content/uploads/2015/07/fooddelivery.jpeg");
+}
+tr
+{
+    background-color: white;
+}
+h3
+{
+    margin-top: 10px;
 }
