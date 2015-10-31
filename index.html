@@ -6,6 +6,8 @@
     <link rel="stylesheet" type="text/css" href="styles.css">
     <script src="jquery-2.1.4.min.js"></script>
     <script src="scripts.js"></script>
+    <script src="http://maxcdn.bootstrap.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 </head>
 <body onload="createTable()">
     <div class="advice">
@@ -13,9 +15,9 @@
         <p>Double click on a cell to edit it again.</p>
         <p>Click on a row to select it. The selected row is outlined in blue.</p>
         <p>Food that is expiring in the next three days or is expired is highlighted in red. </p>
-        <button onclick="createTable()">Add a Row</button>
-        <button onclick="deleteRow()">Delete Selected Row</button>
-        <button onclick="deleteLastRow()">Delete the Last Row</button>
+        <button onclick="createTable()" class="btn btn-primary btn-sm">Add a Row</button>
+        <button onclick="deleteRow()" class="btn btn-info btn-sm">Delete Selected Row</button>
+        <button onclick="deleteLastRow()" class="btn btn-danger btn-sm">Delete the Last Row</button>
     </div>
 
     <table id="myTable" align="center">
